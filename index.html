@@ -9,7 +9,7 @@
 <body>
   <main class="wrap">
     <header class="hero card glow">
-      <div class="brand-mark" aria-hidden="true">⚡</div>
+      <div class="brand-mark" aria-hidden="true"><img src="assets/engineering-nusantara-symbol.jpg" alt="Engineering Nusantara symbol"></div>
       <div>
         <p class="eyebrow">NUSANTARA ENGINEERING BRIEF</p>
         <h1>Engineering Nusantara Digest</h1>
@@ -56,7 +56,7 @@ async function loadCards(){
     if(!items.length){box.innerHTML='<p class="note">No filtered articles yet. Run the pipeline again.</p>';return;}
     box.innerHTML=items.map(a=>{
       const img=a.thumbnail?`<img src="${a.thumbnail}" alt="thumbnail" loading="lazy" onerror="this.style.display='none'">`:'';
-      return `<article class="story"><div class="thumb">${img}</div><div class="meta"><h3><a href="${a.url}" target="_blank" rel="noopener">${a.title}</a></h3><p>${a.blog} · ${a.published||''} · ${a.domain}</p></div></article>`;
+      return `<article class="story"><div class="thumb">${img}</div><div class="meta"><h3><a href="${a.url}" target="_blank" rel="noopener">${a.title}</a></h3><p><span class="badge">${a.blog}</span> ${a.published||''} · ${a.domain}</p></div></article>`;
     }).join('');
   }catch(e){box.innerHTML='<p class="note">Unable to load articles.json yet.</p>'}
 }
