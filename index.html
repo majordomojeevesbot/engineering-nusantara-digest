@@ -8,58 +8,57 @@
 </head>
 <body>
   <main class="wrap">
-    <header class="hero card">
+    <header class="hero card glow">
       <div class="brand-mark" aria-hidden="true">⚡</div>
       <div>
-        <p class="eyebrow">Weekly Intelligence</p>
+        <p class="eyebrow">NUSANTARA ENGINEERING BRIEF</p>
         <h1>Engineering Nusantara Digest</h1>
-        <p class="sub">Engineering + infrastructure updates for Indonesia, filtered for signal.</p>
+        <p class="sub">Curated signals on infrastructure, industry engineering, digital systems, and applied AI in Indonesia.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#digest">Read Digest</a>
-          <a class="btn" href="#join">Join Email List</a>
+          <a class="btn" href="#join">Join List</a>
         </div>
       </div>
     </header>
 
     <section class="grid-2">
       <article id="join" class="card">
-        <h2>Join the Email List</h2>
-        <p>Weekly concise issue. Reply in Telegram with your email while signup form is being wired.</p>
+        <h2>🟧 Join the Email List</h2>
+        <p>One sharp weekly issue. Low noise, high signal.</p>
+        <ul>
+          <li>Infrastructure + engineering first</li>
+          <li>Indonesia-centric lens</li>
+          <li>5-minute executive read</li>
+        </ul>
       </article>
       <article class="card">
-        <h2>Filter Policy</h2>
-        <p>Only engineering and infrastructure-relevant stories are surfaced below.</p>
-        <p class="note">Includes AI, telecom, digital infra, power, transport, logistics, and startup engineering.</p>
+        <h2>🟩 Current Lens</h2>
+        <div class="chips">
+          <span>Power & Energy</span><span>Telecom & Fiber</span><span>Transport Infra</span><span>Industrial Tech</span><span>AI in Ops</span>
+        </div>
+        <p class="note">Filter is tuned to engineering + infrastructure relevance only.</p>
       </article>
     </section>
 
     <section id="digest" class="card">
       <h2>Latest Digest</h2>
-      <p><a href="latest.md">Open raw markdown</a></p>
+      <p class="note">Cards below are auto-filtered and pull source thumbnails from publisher pages.</p>
       <div id="cards" class="cards"></div>
     </section>
   </main>
 
 <script>
 async function loadCards(){
-  const box = document.getElementById('cards');
-  try {
-    const res = await fetch('articles.json?ts=' + Date.now());
-    const items = await res.json();
-    if(!items.length){ box.innerHTML = '<p class="note">No filtered articles yet. Run the pipeline again.</p>'; return; }
-    box.innerHTML = items.map(a => {
-      const img = a.thumbnail ? `<img src="${a.thumbnail}" alt="thumbnail" loading="lazy" onerror="this.style.display='none'">` : '';
-      return `<article class="story">
-        <div class="thumb">${img}</div>
-        <div class="meta">
-          <h3><a href="${a.url}" target="_blank" rel="noopener">${a.title}</a></h3>
-          <p>${a.blog} · ${a.published || ''} · ${a.domain}</p>
-        </div>
-      </article>`;
+  const box=document.getElementById('cards');
+  try{
+    const res=await fetch('articles.json?ts='+Date.now());
+    const items=await res.json();
+    if(!items.length){box.innerHTML='<p class="note">No filtered articles yet. Run the pipeline again.</p>';return;}
+    box.innerHTML=items.map(a=>{
+      const img=a.thumbnail?`<img src="${a.thumbnail}" alt="thumbnail" loading="lazy" onerror="this.style.display='none'">`:'';
+      return `<article class="story"><div class="thumb">${img}</div><div class="meta"><h3><a href="${a.url}" target="_blank" rel="noopener">${a.title}</a></h3><p>${a.blog} · ${a.published||''} · ${a.domain}</p></div></article>`;
     }).join('');
-  } catch (e){
-    box.innerHTML = '<p class="note">Unable to load articles.json yet.</p>';
-  }
+  }catch(e){box.innerHTML='<p class="note">Unable to load articles.json yet.</p>'}
 }
 loadCards();
 </script>
