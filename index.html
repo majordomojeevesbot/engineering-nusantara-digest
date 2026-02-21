@@ -13,10 +13,10 @@
       <div>
         <p class="eyebrow">Weekly Intelligence</p>
         <h1>Engineering Nusantara Digest</h1>
-        <p class="sub">High-signal updates on Indonesia’s engineering, startups, infrastructure, and policy shifts.</p>
+        <p class="sub">Engineering + infrastructure updates for Indonesia, filtered for signal.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#join">Join the Email List</a>
-          <a class="btn" href="#digest">Read Latest</a>
+          <a class="btn btn-primary" href="#digest">Read Digest</a>
+          <a class="btn" href="#join">Join Email List</a>
         </div>
       </div>
     </header>
@@ -24,32 +24,44 @@
     <section class="grid-2">
       <article id="join" class="card">
         <h2>Join the Email List</h2>
-        <p>Get a concise weekly issue: what changed, why it matters, and what to watch next.</p>
-        <ul>
-          <li>5-minute read</li>
-          <li>Indonesia-first curation</li>
-          <li>No spam, unsubscribe anytime</li>
-        </ul>
-        <p class="note">Signup wiring is next. For now, reply in Telegram with your email.</p>
+        <p>Weekly concise issue. Reply in Telegram with your email while signup form is being wired.</p>
       </article>
-
       <article class="card">
-        <h2>This Week’s Focus</h2>
-        <div class="chips">
-          <span>AI & Compute</span>
-          <span>Digital Infra</span>
-          <span>Startup Funding</span>
-          <span>Policy & Regulation</span>
-        </div>
-        <p class="note">Next sprint: category scoring + trend chart + archives.</p>
+        <h2>Filter Policy</h2>
+        <p>Only engineering and infrastructure-relevant stories are surfaced below.</p>
+        <p class="note">Includes AI, telecom, digital infra, power, transport, logistics, and startup engineering.</p>
       </article>
     </section>
 
     <section id="digest" class="card">
       <h2>Latest Digest</h2>
-      <p><a href="latest.md">Open raw markdown digest</a></p>
-      <iframe title="Latest digest" src="latest.md"></iframe>
+      <p><a href="latest.md">Open raw markdown</a></p>
+      <div id="cards" class="cards"></div>
     </section>
   </main>
+
+<script>
+async function loadCards(){
+  const box = document.getElementById('cards');
+  try {
+    const res = await fetch('articles.json?ts=' + Date.now());
+    const items = await res.json();
+    if(!items.length){ box.innerHTML = '<p class="note">No filtered articles yet. Run the pipeline again.</p>'; return; }
+    box.innerHTML = items.map(a => {
+      const img = a.thumbnail ? `<img src="${a.thumbnail}" alt="thumbnail" loading="lazy" onerror="this.style.display='none'">` : '';
+      return `<article class="story">
+        <div class="thumb">${img}</div>
+        <div class="meta">
+          <h3><a href="${a.url}" target="_blank" rel="noopener">${a.title}</a></h3>
+          <p>${a.blog} · ${a.published || ''} · ${a.domain}</p>
+        </div>
+      </article>`;
+    }).join('');
+  } catch (e){
+    box.innerHTML = '<p class="note">Unable to load articles.json yet.</p>';
+  }
+}
+loadCards();
+</script>
 </body>
 </html>
