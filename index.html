@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,18 +8,47 @@
 </head>
 <body>
   <main class="wrap">
-    <h1>Engineering Nusantara Digest</h1>
-    <p class="sub">High-level updates on engineering, startups, infra, and tech in Indonesia.</p>
+    <header class="hero card">
+      <div class="brand-mark" aria-hidden="true">⚡</div>
+      <div>
+        <p class="eyebrow">Weekly Intelligence</p>
+        <h1>Engineering Nusantara Digest</h1>
+        <p class="sub">High-signal updates on Indonesia’s engineering, startups, infrastructure, and policy shifts.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#join">Join the Email List</a>
+          <a class="btn" href="#digest">Read Latest</a>
+        </div>
+      </div>
+    </header>
 
-    <section class="card">
-      <h2>Join the Email List</h2>
-      <p>Reply to this Telegram bot with your email for now. Signup form wiring comes next milestone.</p>
+    <section class="grid-2">
+      <article id="join" class="card">
+        <h2>Join the Email List</h2>
+        <p>Get a concise weekly issue: what changed, why it matters, and what to watch next.</p>
+        <ul>
+          <li>5-minute read</li>
+          <li>Indonesia-first curation</li>
+          <li>No spam, unsubscribe anytime</li>
+        </ul>
+        <p class="note">Signup wiring is next. For now, reply in Telegram with your email.</p>
+      </article>
+
+      <article class="card">
+        <h2>This Week’s Focus</h2>
+        <div class="chips">
+          <span>AI & Compute</span>
+          <span>Digital Infra</span>
+          <span>Startup Funding</span>
+          <span>Policy & Regulation</span>
+        </div>
+        <p class="note">Next sprint: category scoring + trend chart + archives.</p>
+      </article>
     </section>
 
-    <section class="card">
+    <section id="digest" class="card">
       <h2>Latest Digest</h2>
-      <p><a href="latest.md">Open latest digest markdown</a></p>
-      <iframe src="latest.md"></iframe>
+      <p><a href="latest.md">Open raw markdown digest</a></p>
+      <iframe title="Latest digest" src="latest.md"></iframe>
     </section>
   </main>
 </body>
